@@ -11,15 +11,21 @@ const App =() =>{
     const [places, setPlaces] = useState([]);
 
     const [coordinates, setCoordinates] = useState({});
-    const [bound, setBounds] = useState(null);
+    const [bounds, setBounds] = useState(null);
+
+    useEffect(() =>{
+        navigator.geolocation.getCurrentPosition(({coords: {latitude, longitude}}) => {
+            setCoordinates({lat: latitude, lng: longitude});
+        })
+    }, []);
     
     useEffect(() =>{
-        getPlacesData()
+        getPlacesData(bounds.sw, bounds.ne)
             .then((data) => {
                 console.log(data);
                 setPlaces(data);
             });
-    }, []);
+    }, [coordinates, bounds]);
 
     return(
         <>
