@@ -14,7 +14,7 @@ const Header = ({setCoordinates}) => {
     const onPlaceChanged = () => {
         const lat = autocomplete.getPlace().geometry.location.lat();
         const lng = autocomplete.getPlace().geometry.location.lng();
-
+        // getplace is working but there is a problem with geometry it does not see it and give undefined for any request to it
         setCoordinates({lat, lng});
     }
 
